@@ -4,17 +4,29 @@ import { ZodError, ZodSchema } from 'zod';
 
 import { ResponseStatus, ServiceResponse } from '@/common/models/serviceResponse';
 
-export const handleServiceResponse = (serviceResponse: ServiceResponse<any>, response: Response) => {
+export const handleServiceResponse = (
+  serviceResponse: ServiceResponse<any>,
+  response: Response
+) => {
   return response.status(serviceResponse.statusCode).send(serviceResponse);
 };
 
-export const validateRequest = (schema: ZodSchema) => (req: Request, res: Response, next: NextFunction) => {
-  try {
-    schema.parse({ body: req.body, query: req.query, params: req.params });
-    next();
-  } catch (err) {
-    const errorMessage = `Invalid input: ${(err as ZodError).errors.map((e) => e.message).join(', ')}`;
-    const statusCode = StatusCodes.BAD_REQUEST;
-    res.status(statusCode).send(new ServiceResponse<null>(ResponseStatus.Failed, errorMessage, null, statusCode));
-  }
-};
+export const validateRequest =
+  (schema: ZodSchema) => (req: Request, res: Response, next: NextFunction) => {
+    try {
+      schema.parse({ body: req.body, query: req.query, params: req.params });
+      next();
+    } catch (err) {
+      const errorMessage = `Invalid input: ${(err as ZodError).errors.map((e) => e.path[1] + ':' + e.message).join(', ')}`;
+      const errors = (err as ZodError).errors.reduce((acc: any, e) => {
+        acc[e.path[1]] = e.message;
+        return acc;
+      }, {});
+      const statusCode = StatusCodes.BAD_REQUEST;
+      res
+        .status(statusCode)
+        .send(
+          new ServiceResponse<null>(ResponseStatus.Failed, errorMessage, null, statusCode, errors)
+        );
+    }
+  };

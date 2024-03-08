@@ -13,6 +13,7 @@ import { userRouter } from '@/routes/user/userRouter';
 
 const logger = pino({ name: 'server start' });
 const app: Express = express();
+app.use(express.json()); // Ensure this line is before defining routes
 
 // Set the application to trust the reverse proxy
 app.set('trust proxy', true);

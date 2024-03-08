@@ -4,7 +4,7 @@ import { z } from 'zod';
 
 import { createApiResponse } from '@/api-docs/openAPIResponseBuilders';
 import { handleServiceResponse, validateRequest } from '@/common/utils/httpHandlers';
-import { GetUserSchema, UserSchema } from '@/routes/user/userModel';
+import { CreateUserRequestBodySchema, GetUserSchema, UserSchema } from '@/routes/user/userModel';
 import { userService } from '@/routes/user/userService';
 
 export const userRegistry = new OpenAPIRegistry();
@@ -18,7 +18,7 @@ export const userRouter: Router = (() => {
     method: 'get',
     path: '/users',
     tags: ['User'],
-    responses: createApiResponse(z.array(UserSchema), 'Success'),
+    responses: createApiResponse(z.array(UserSchema.omit({ password: true })), 'Success'),
   });
 
   router.get('/', async (_req: Request, res: Response) => {
@@ -31,7 +31,7 @@ export const userRouter: Router = (() => {
     path: '/users/{id}',
     tags: ['User'],
     request: { params: GetUserSchema.shape.params },
-    responses: createApiResponse(UserSchema, 'Success'),
+    responses: createApiResponse(UserSchema.omit({ password: true }), 'Success'),
   });
 
   router.get('/:id', validateRequest(GetUserSchema), async (req: Request, res: Response) => {
@@ -39,6 +39,33 @@ export const userRouter: Router = (() => {
     const serviceResponse = await userService.findById(id);
     handleServiceResponse(serviceResponse, res);
   });
+
+  // Assuming CreateUserRequestBodySchema is defined as follows
+  userRegistry.registerPath({
+    method: 'post',
+    path: '/users',
+    tags: ['User'],
+    request: {
+      body: {
+        content: {
+          'application/json': {
+            schema: CreateUserRequestBodySchema.shape.body,
+          },
+        },
+      },
+    },
+    responses: createApiResponse(UserSchema.omit({ password: true }), 'User created successfully'),
+  });
+
+  router.post(
+    '/',
+    validateRequest(CreateUserRequestBodySchema),
+    async (req: Request, res: Response) => {
+      const userData = req.body;
+      const serviceResponse = await userService.create(userData);
+      handleServiceResponse(serviceResponse, res);
+    }
+  );
 
   return router;
 })();

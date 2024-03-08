@@ -1,4 +1,5 @@
 import { z } from 'zod';
+const isValidPositiveNumber = (num: number) => num > 0;
 
 export const commonValidations = {
   id: z

@@ -10,11 +10,19 @@ export class ServiceResponse<T = null> {
   message: string;
   responseObject: T;
   statusCode: number;
+  errors?: any[];
 
-  constructor(status: ResponseStatus, message: string, responseObject: T, statusCode: number) {
+  constructor(
+    status: ResponseStatus,
+    message: string | any,
+    responseObject: T,
+    statusCode: number,
+    errors?: any[]
+  ) {
     this.success = status === ResponseStatus.Success;
     this.message = message;
     this.responseObject = responseObject;
+    this.errors = errors;
     this.statusCode = statusCode;
   }
 }
@@ -25,4 +33,5 @@ export const ServiceResponseSchema = <T extends z.ZodTypeAny>(dataSchema: T) =>
     message: z.string(),
     responseObject: dataSchema.optional(),
     statusCode: z.number(),
+    errors: z.any().array(),
   });
