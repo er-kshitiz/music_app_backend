@@ -1,7 +1,7 @@
 import { StatusCodes } from 'http-status-codes';
 import { Mock } from 'vitest';
 
-import { User } from '@/routes/user/userModel';
+import { UserWithoutPassword } from '@/routes/user/userModel';
 import { userRepository } from '@/routes/user/userRepository';
 import { userService } from '@/routes/user/userService';
 
@@ -14,10 +14,10 @@ vi.mock('@/server', () => ({
 }));
 
 describe('userService', () => {
-  const mockUsers: User[] = [
+  const mockUsers: UserWithoutPassword[] = [
     {
       id: 1,
-      name: 'Alice',
+      username: 'Alice',
       email: 'alice@example.com',
       age: 42,
       createdAt: new Date(),
@@ -25,7 +25,7 @@ describe('userService', () => {
     },
     {
       id: 2,
-      name: 'Bob',
+      username: 'Bob',
       email: 'bob@example.com',
       age: 21,
       createdAt: new Date(),
