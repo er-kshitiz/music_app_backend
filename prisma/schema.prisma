@@ -14,13 +14,22 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  username  String   @unique
-  email     String   @unique
-  password  String
-  age       Int
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  id            Int      @id @default(autoincrement())
+  userType      UserType @map("user_type")
+  firstName     String?  @map("first_name")
+  lastName      String?  @map("last_name")
+  email         String   @unique
+  contactNumber String?  @map("contact_number")
+  password      String
+  age           Int?
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
 
   @@map("users")
+}
+
+enum UserType {
+  artist
+  fan
+  superadmin
 }
