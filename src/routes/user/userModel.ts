@@ -3,6 +3,7 @@ import { z } from 'zod';
 
 import { commonValidations } from '@/common/utils/commonValidation';
 extendZodWithOpenApi(z);
+
 export type User = z.infer<typeof UserSchema>;
 export type UserWithoutPassword = Omit<User, 'password'>;
 

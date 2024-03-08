@@ -1,15 +1,27 @@
+import { Prisma } from '@prisma/client';
 import { StatusCodes } from 'http-status-codes';
+
 import { ResponseStatus, ServiceResponse } from '@/common/models/serviceResponse';
 import { UserWithoutPassword } from '@/routes/user/userModel';
 import { UserRepository } from '@/routes/user/userRepository';
 import { logger } from '@/server';
-import { Prisma } from '@prisma/client';
 
 export class UserService {
   private userRepository: UserRepository;
 
   constructor() {
     this.userRepository = new UserRepository();
+  }
+
+  // Common error handling method
+  private handleError(
+    ex: Error,
+    errorMessagePrefix: string,
+    statusCode: number
+  ): ServiceResponse<any> {
+    const errorMessage = `${errorMessagePrefix}: ${ex.message}`;
+    logger.error(errorMessage);
+    return new ServiceResponse(ResponseStatus.Failed, errorMessage, null, statusCode);
   }
 
   // Retrieves all users from the database
@@ -31,12 +43,9 @@ export class UserService {
         StatusCodes.OK
       );
     } catch (ex) {
-      const errorMessage = `Error finding all users: ${(ex as Error).message}`;
-      logger.error(errorMessage);
-      return new ServiceResponse(
-        ResponseStatus.Failed,
-        errorMessage,
-        null,
+      return this.handleError(
+        ex as Error,
+        'Error finding all users',
         StatusCodes.INTERNAL_SERVER_ERROR
       );
     }
@@ -46,27 +55,16 @@ export class UserService {
   async create(body: Prisma.UserCreateInput): Promise<ServiceResponse<any | null>> {
     try {
       const user = await this.userRepository.createAsync(body);
-      if (!user) {
-        return new ServiceResponse(
-          ResponseStatus.Failed,
-          'User created Successfully',
-          null,
-          StatusCodes.NOT_FOUND
-        );
-      }
       return new ServiceResponse<UserWithoutPassword>(
         ResponseStatus.Success,
-        'User found',
+        'User created Successfully',
         user,
         StatusCodes.OK
       );
     } catch (ex) {
-      const errorMessage = `${(ex as Error).message}`;
-      logger.error(errorMessage);
-      return new ServiceResponse(
-        ResponseStatus.Failed,
-        errorMessage,
-        null,
+      return this.handleError(
+        ex as Error,
+        'Error creating user',
         StatusCodes.INTERNAL_SERVER_ERROR
       );
     }
@@ -91,12 +89,9 @@ export class UserService {
         StatusCodes.OK
       );
     } catch (ex) {
-      const errorMessage = `Error finding user with id ${id}: ${(ex as Error).message}`;
-      logger.error(errorMessage);
-      return new ServiceResponse(
-        ResponseStatus.Failed,
-        errorMessage,
-        null,
+      return this.handleError(
+        ex as Error,
+        `Error finding user with id ${id}`,
         StatusCodes.INTERNAL_SERVER_ERROR
       );
     }
