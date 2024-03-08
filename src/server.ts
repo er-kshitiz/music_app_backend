@@ -9,7 +9,9 @@ import rateLimiter from '@/common/middleware/rateLimiter';
 import requestLogger from '@/common/middleware/requestLogger';
 import { env } from '@/common/utils/envConfig';
 import { healthCheckRouter } from '@/routes/healthCheck/healthCheckRouter';
-import { userRouter } from '@/routes/user/userRouter';
+
+import { songRouter } from './routes/song/songRouter';
+import { userRouter } from './routes/user/userRouter';
 
 const logger = pino({ name: 'server start' });
 const app: Express = express();
@@ -29,6 +31,7 @@ app.use(requestLogger());
 // Routes
 app.use('/health-check', healthCheckRouter);
 app.use('/users', userRouter);
+app.use('/songs', songRouter);
 
 // Swagger UI
 app.use(openAPIRouter);
