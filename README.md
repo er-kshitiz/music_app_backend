@@ -1,94 +1,52 @@
-# 🚀 Express TypeScript Boilerplate 2024
+# 🎨 Artist Dashboard
 
-[![Docker Image CI](https://github.com/edwinhern/express-typescript-2024/actions/workflows/docker-image.yml/badge.svg?branch=master)](https://github.com/edwinhern/express-typescript-2024/actions/workflows/docker-image.yml)
-[![CodeQL](https://github.com/edwinhern/express-typescript-2024/actions/workflows/codeql.yml/badge.svg)](https://github.com/edwinhern/express-typescript-2024/actions/workflows/codeql.yml)
-[![Build Express+Typescript Application](https://github.com/edwinhern/express-typescript-2024/actions/workflows/test.yml/badge.svg)](https://github.com/edwinhern/express-typescript-2024/actions/workflows/test.yml)
-
-## 🌟 Introduction
-
-Welcome to the Express TypeScript Boilerplate 2024 – a streamlined, efficient, and scalable foundation for building powerful backend services. This boilerplate merges modern tools and practices in Express.js and TypeScript, enhancing productivity, code quality, and performance.
-
-## 💡 Motivation and Intentions
-
-Developed to streamline backend development, this boilerplate is your solution for:
-
-- ✨ Reducing setup time for new projects.
-- 📊 Ensuring code consistency and quality.
-- ⚡ Facilitating rapid development with cutting-edge tools.
-- 🛡️ Encouraging best practices in security, testing, and performance.
+## 📝 Overview
+The Artist Dashboard is a web application designed to empower artists to manage their albums, songs, and engage with their fans seamlessly. It provides functionalities like album management, song uploads, fan interaction, and more, all in one place.
 
 ## 🚀 Features
+### Artist Dashboard
+- **Login/Signup**: Secure authentication system for artists to access their dashboard.
+- **Album Section**: Easily manage albums with options to list, add, and edit albums.
+- **Album Art**: Upload and set album art, with the ability to preview with fan's name overlaid.
+- **Song Section**: Manage songs, whether singles or part of an album, including upload and edit functionalities.
+- **Preview and Crop Music**: Preview and set preview sections of songs for fans.
+- **Detail Page**: View details of songs, including a list of fans who bought specific songs and the option to play the song.
+- **Profile Page**: Manage artist details and settings.
 
-- 📁 Modular Structure: Organized by feature for easy navigation and scalability.
-- 💨 Faster Execution with tsx: Rapid TypeScript execution with esbuild, complemented by tsc for type checking.
-- 🌐 Stable Node Environment: Latest LTS Node version in .nvmrc.
-- 🔧 Simplified Environment Variables: Centralized and easy-to-manage configuration.
-- 🔗 Path Aliases: Cleaner code with shortcut imports.
-- 🔄 Dependabot Integration: Automatic updates for secure and up-to-date dependencies.
-- 🔒 Security: Helmet for HTTP header security and CORS setup.
-- 📊 Logging: Efficient logging with pino-http.
-- 🧪 Comprehensive Testing: Robust setup with Jest and Supertest.
-- 🔑 Code Quality Assurance: Husky and lint-staged for consistent quality.
-- ✅ Unified Code Style: ESLint and Prettier for a consistent coding standard.
-- 📃 API Response Standardization: ServiceResponse class for consistent API responses.
-- 🐳 Docker Support: Ready for containerization and deployment.
-- 📝 Input Validation with Zod: Strongly typed request validation using Zod.
-- 🧩 API Spec Generation: Automated OpenAPI specification generation from Zod schemas to ensure up-to-date and accurate API documentation.
+### User Dashboard
+- **Login/Signup**: Secure authentication system for fans to access their dashboard.
+- **Home Page**: A dynamic newsfeed-like interface offering artist recommendations to follow, updates, and featured content.
+- **Buy Music**: Purchase songs directly from the platform.
+- **Preview Song**: Preview songs before purchasing.
+- **Purchased Song Section**: Access purchased songs and manage them.
 
-## 🛠️ Getting Started
+## 💻 Tech Stack
+- **Express.js**: A fast, unopinionated, minimalist web framework for Node.js.
+- **Prisma**: A modern database toolkit for TypeScript and Node.js that makes database access easy with type safety.
 
-### Step 1: 🚀 Initial Setup
+## 🛠️ Setup
+1. Clone the repository.
+2. Install dependencies: `npm install`
+3. Run the development server: `npm start`
 
-- Clone the repository: `git clone https://github.com/edwinhern/express-typescript-2024.git`
-- Navigate: `cd express-typescript-2024`
-- Install dependencies: `npm ci`
+## 🤝 Contributing
+Contributions are welcome! Please feel free to submit issues, feature requests, or pull requests.
 
-### Step 2: ⚙️ Environment Configuration
+## 📄 License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-- Create `.env`: Copy `.env.template` to `.env`
-- Update `.env`: Fill in necessary environment variables
+## 🙏 Acknowledgements
+- This project was inspired by the need for artists to have a centralized platform for managing their music and engaging with their fans.
+- Special thanks to the Express.js and Prisma communities for their invaluable resources and support.
 
-### Step 3: 🏃‍♂️ Running the Project
+## ✍️ Authors
+- [Kshitiz Shrestha](https://github.com/er-kshitiz) - Lead Developer
+- [Sudip Pokharel](https://github.com/sudip) - Lead Developer
 
-- Development Mode: `npm run dev`
-- Building: `npm run build`
-- Production Mode: Set `.env` to `NODE_ENV="production"` then `npm run build && npm run start`
 
-## 📁 Project Structure
+## 📧 Contact
+For any inquiries or feedback, feel free to contact us at [er.kshitizshrestha@gmail.com](mailto:er.kshitizshrestha@gmail.com).
 
-```
-.
-├── api-docs
-│   ├── openAPIDocumentGenerator.ts
-│   ├── openAPIResponseBuilders.ts
-│   └── openAPIRouter.ts
-├── common
-│   ├── middleware
-│   │   ├── errorHandler.ts
-│   │   ├── rateLimiter.ts
-│   │   └── requestLogger.ts
-│   ├── models
-│   │   └── serviceResponse.ts
-│   └── utils
-│       ├── commonValidation.ts
-│       ├── envConfig.ts
-│       └── httpHandlers.ts
-├── index.ts
-├── modules
-│   ├── healthCheck
-│   │   └── healthCheckRouter.ts
-│   └── user
-│       ├── userModel.ts
-│       ├── userRepository.ts
-│       ├── userRouter.ts
-│       └── userService.ts
-└── server.ts
+---
 
-9 directories, 17 files
-```
-
-## 🤝 Feedback and Contributions
-
-We'd love to hear your feedback and suggestions for further improvements. Feel free to contribute and join us in making backend development cleaner and faster!
-
-🎉 Happy coding!
+Feel free to customize this README according to your project's specific details and preferences!
