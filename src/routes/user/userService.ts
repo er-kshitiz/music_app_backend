@@ -3,7 +3,7 @@ import { ResponseStatus, ServiceResponse } from '@/common/models/serviceResponse
 import { UserWithoutPassword } from '@/routes/user/userModel';
 import { UserRepository } from '@/routes/user/userRepository';
 import { logger } from '@/server';
-import { Prisma } from '@/generated/client';
+import { Prisma } from '@prisma/client';
 
 export class UserService {
   private userRepository: UserRepository;

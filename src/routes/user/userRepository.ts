@@ -1,6 +1,5 @@
-import { PrismaClient, Prisma, User as PrismaUser } from '@/generated/client';
+import { PrismaClient, Prisma, User as PrismaUser } from '@prisma/client';
 import { User, UserWithoutPassword } from '@/routes/user/userModel';
-
 export class UserRepository {
   private prisma: PrismaClient;
 
