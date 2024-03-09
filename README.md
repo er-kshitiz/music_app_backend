@@ -33,7 +33,10 @@ The Artist Dashboard is a web application designed to empower artists to manage 
 
 1. Clone the repository.
 2. Install dependencies: `npm install`
-3. Run the development server: `npm start`
+3. Make `.env` file from `.env.template`
+4. Add Database in .env
+5. Run `npx prisma migrate dev`
+6. Run the development server: `npm dev`
 
 ## 🤝 Contributing
 
