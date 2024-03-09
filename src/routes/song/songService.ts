@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from 'fs';
+import { readFileSync } from 'fs';
 import { StatusCodes } from 'http-status-codes';
 import Jimp from 'jimp'; // Import Jimp for image manipulation
 import nodeID3 from 'node-id3';
@@ -56,8 +56,8 @@ export class SongService {
       );
 
       // Write the updated MP3 buffer to a temporary file
-      const tempFilePath = join(__dirname, '../../common/resources/mp3/new_music.mp3');
-      writeFileSync(tempFilePath, updatedMp3Buffer);
+      // const tempFilePath = join(__dirname, '../../common/resources/mp3/new_music.mp3');
+      // writeFileSync(tempFilePath, updatedMp3Buffer);
 
       // Now you can serve the temporary file for download
       return updatedMp3Buffer;
