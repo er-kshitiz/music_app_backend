@@ -54,7 +54,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## ✍️ Authors
 
 - [Kshitiz Shrestha](https://github.com/er-kshitiz) - Lead Developer
-- [Sudip Pokharel](https://github.com/sudip) - Lead Developer
+- [Sudip Pokharel](https://github.com/Sudip-Pokharel) - Lead Developer
 
 ## 📧 Contact
 
